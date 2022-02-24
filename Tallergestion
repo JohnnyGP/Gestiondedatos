@@ -234,6 +234,24 @@ from productos p
 where p.id_categoria != 4
 select * from productos;
 
+-- 2 Decrementar en un 22% el precio de todos aquellos productos que han sido pagados con 'bitcoin'
+use facturacion
+begin tran
+select * from productos p
+update p
+set  p.precio = p.precio - (p.precio * 0.22)
+from productos p
+inner join detalles on detalles.id_producto = p.id_producto
+where detalles.id_factura = 14
+
+-- 3 Eliminar los clientes que no han realizado compras
+
+use facturacion
+begin tran
+delete k 
+from clientes k
+left join facturas f on k.id_cliente = f.id_cliente
+where f.id_cliente is null
 
 -- 4 Incrementar el stock de los productos cuyo nombre inician con la letra 'C' y que no hayan sido pagados con 'tarjeta débito'
 
