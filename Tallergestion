@@ -235,6 +235,15 @@ where p.id_categoria != 4
 select * from productos;
 
 
+-- 4 Incrementar el stock de los productos cuyo nombre inician con la letra 'C' y que no hayan sido pagados con 'tarjeta débito'
+
+update p
+set  p.stock = p.stock + 1
+from productos p
+join modo_pagos mp on mp.num_pago = mp.num_pago
+where mp.num_pago != 2 and p.nombre LIKE 'c%'
+select * from productos;
+
 
 -- 5 Mostrar el total comprado por cliente que han pagado en 'efectivo' productos de la categoría de 'Mercado'
 
